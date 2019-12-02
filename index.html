@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h1>TodoList</h1>
-    <!-- start of list area -->
-    <ul id="todo-list"></ul>
-    <!-- end of list area -->
-
-    <input type="text" placeholder="Do Something" id="todo-input" />
-
-    <!-- button -->
-    <button id="add-todo">Add Todo</button>
-    <!-- end button -->
+    <div class="container">
+        <h1>TodoList</h1>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input type="text" class="form-control" placeholder="Do Something" id="todo-input" />
+            </div>
+            <div class="col-md-6">
+                <!-- button -->
+                <button id="add-todo" type="button" class="btn btn-primary">Add Todo</button>
+                <!-- end button -->
+            </div>
+        </div>
+        <!-- start of list area -->
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush" id="todo-list"></ul>
+        </div>
+        <!-- end of list area -->
+    </div>
 </body>
-<script src="script.js"></script>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/jquery-3.3.1.slim.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 
 </html>
