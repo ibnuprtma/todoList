@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <style>
+        .done {
+            color: green;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,11 +24,12 @@
             <div class="col-md-6">
                 <!-- button -->
                 <button id="add-todo" type="button" class="btn btn-primary">Add Todo</button>
+                <button id="reset-todo" type="button" class="btn btn-outline-primary">Reset Todo</button>
                 <!-- end button -->
             </div>
         </div>
         <!-- start of list area -->
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 34rem;">
             <ul class="list-group list-group-flush" id="todo-list"></ul>
         </div>
         <!-- end of list area -->

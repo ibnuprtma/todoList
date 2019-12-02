@@ -1,40 +1,95 @@
-// elements initiation
+const defaultTodos = [
+    { text: "do this", completed: false },
+    { text: "do that", completed: false },
+    { text: "do another", completed: true }
+];
+
+const todos = [...(JSON.parse(localStorage.getItem("todos")) || defaultTodos)];
+
 const elements = {
     todoList: document.getElementById("todo-list"),
     todoInput: document.getElementById("todo-input"),
-    addButton: document.getElementById("add-todo")
+    addButton: document.getElementById("add-todo"),
+    resetButton: document.getElementById("reset-todo")
 };
 
-// input validation
+///////////////////////////////////////////////////////////////////////////////
+
+function renderTodoList() {
+    elements.todoList.innerHTML = null;
+    todos.forEach(function (todo, index) {
+        const newTodo = document.createElement("li");
+        newTodo.className = 'list-group-item'
+        newTodo.innerText = todo.text;
+
+        if (todo.completed) {
+            newTodo.classList.add("done");
+        } else {
+            const completeButton = document.createElement("button");
+            completeButton.innerText = "mark as complete";
+            completeButton.addEventListener("click", function () {
+                completeTodo(index);
+            });
+
+            newTodo.append(" | ", completeButton);
+        }
+
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "delete";
+        deleteButton.addEventListener("click", function () {
+            deleteTodo(index);
+        });
+
+        newTodo.append(" | ", deleteButton);
+        elements.todoList.appendChild(newTodo);
+    });
+}
+
 function isInputFilled() {
     return elements.todoInput.value.length > 0;
 }
 
-// add data function
 function addTodo() {
     if (isInputFilled()) {
         const todoText = elements.todoInput.value;
-        const newTodoElement = document.createElement("li");
-        newTodoElement.className = 'list-group-item'
-        newTodoElement.innerText = todoText;
-
-        elements.todoList.appendChild(newTodoElement);
+        todos.push({ text: todoText, completed: false });
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodoList();
         elements.todoInput.value = "";
         elements.todoInput.focus();
     }
 }
 
-// add data with press enterBtn
+function completeTodo(index) {
+    todos[index].completed = true;
+    localStorage.setItem("todos", JSON.stringify(todos));
+    renderTodoList();
+}
+
+function deleteTodo(index) {
+    todos.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    renderTodoList();
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
 elements.todoInput.addEventListener("keypress", function (e) {
     if (e.keyCode === 13) {
         addTodo();
     }
 });
 
-// add data with click addButton
 elements.addButton.addEventListener("click", function () {
     addTodo();
 });
 
-// cursor focused
+elements.resetButton.addEventListener("click", function () {
+    localStorage.clear();
+    window.location.reload();
+});
+
+///////////////////////////////////////////////////////////////////////////////
+
+renderTodoList();
 elements.todoInput.focus();
