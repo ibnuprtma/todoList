@@ -26,7 +26,8 @@ function renderTodoList() {
             newTodo.classList.add("done");
         } else {
             const completeButton = document.createElement("button");
-            completeButton.innerText = "mark as complete";
+            completeButton.innerText = 'mark as complete';
+            completeButton.className = 'btn btn-sm btn-success';
             completeButton.addEventListener("click", function () {
                 completeTodo(index);
             });
@@ -36,6 +37,7 @@ function renderTodoList() {
 
         const deleteButton = document.createElement("button");
         deleteButton.innerText = "delete";
+        deleteButton.className = 'btn btn-sm btn-outline-danger'
         deleteButton.addEventListener("click", function () {
             deleteTodo(index);
         });
